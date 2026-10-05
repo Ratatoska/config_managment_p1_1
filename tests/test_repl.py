@@ -8,6 +8,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'src'))
 
 from parser import parse_command
 from shell import Shell
+from vfs import DIRECTORY_MODE, Node, Vfs
 
 
 class ReplTests(unittest.TestCase):
@@ -22,10 +23,13 @@ class ReplTests(unittest.TestCase):
         """Пустые кавычки создают пустой аргумент."""
         self.assertEqual(parse_command("ls ''"), ['ls', ''])
 
-    def test_stubs(self):
-        """Заглушка сообщает имя и аргументы."""
-        self.assertIn("['my folder']", Shell().execute(
-            'cd "my folder"').output)
+    def test_quoted_path(self):
+        """Команда получает каталог с пробелом как один аргумент."""
+        vfs = Vfs()
+        vfs.nodes['/my folder'] = Node('dir', DIRECTORY_MODE, 'user')
+        shell = Shell(vfs=vfs)
+        self.assertFalse(shell.execute('cd "my folder"').error)
+        self.assertEqual(shell.cwd, '/my folder')
 
     def test_unknown_command(self):
         """Неизвестная команда возвращает ошибку."""

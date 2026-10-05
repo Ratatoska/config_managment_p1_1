@@ -1,0 +1,40 @@
+# ls — все поддерживаемые режимы
+ls
+ls -a
+ls -l /
+ls -la /docs
+ls /docs/readme.txt
+ls /missing
+ls -z
+# cd — разные виды путей и ошибки
+cd /docs
+ls notes
+cd notes/lab
+cd ..
+cd -
+cd ~
+cd "/my folder"
+cd /docs/readme.txt
+cd /missing
+cd
+# find — весь список, маска, тип и ошибки
+find /
+find / -name "*.txt"
+find /docs -type d
+find /docs -type f -name "*.txt"
+find /missing
+find / -type x
+find / -bad
+# cal — текущий месяц, месяц и год, весь год, ошибки
+cal
+cal 10 2026
+cal 2026
+cal 13 2026
+cal abc
+# who и обработка ошибок
+who
+who extra
+unknown_command
+ls "broken
+exit now
+exit

@@ -39,7 +39,7 @@ class ConfigTests(unittest.TestCase):
     def test_comments_and_blank_lines(self):
         """Пустые строки и полнострочные комментарии пропускаются."""
         output = []
-        run_lines(Shell(), ['', ' # comment', 'ls'], output.append)
+        run_lines(Shell(), ['', ' # comment', 'exit'], output.append)
         self.assertEqual(len(output), 2)
 
     def test_missing_script(self):

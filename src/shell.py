@@ -4,6 +4,7 @@ import getpass
 import socket
 from dataclasses import dataclass
 
+from commands import BasicCommands
 from parser import parse_command
 from vfs import Vfs
 
@@ -25,8 +26,14 @@ class Shell:
         self.vfs = vfs if vfs is not None else Vfs(vfs_name)
         self.vfs_name = self.vfs.name
         self.cwd = '/'
+        self.previous_cwd = '/'
         self.user = getpass.getuser()
         self.host = socket.gethostname()
+        basic = BasicCommands(self)
+        self.commands = {
+            'ls': basic.ls, 'cd': basic.cd, 'find': basic.find,
+            'cal': basic.cal, 'who': basic.who,
+        }
 
     @property
     def prompt(self):
@@ -42,8 +49,8 @@ class Shell:
             name, *args = tokens
             if name == 'exit':
                 return self._exit(args)
-            if name in ('ls', 'cd'):
-                return CommandResult(f'{name}: аргументы = {args!r}')
+            if name in self.commands:
+                return CommandResult(self.commands[name](args))
             return CommandResult(f'{name}: команда не найдена', error=True)
         except ValueError as error:
             return CommandResult(f'Ошибка: {error}', error=True)
