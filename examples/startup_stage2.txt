@@ -1,0 +1,6 @@
+# Команды и ошибки этапа конфигурации
+ls -la "my folder"
+unknown_command
+cd "my folder"
+ls "broken
+ls /

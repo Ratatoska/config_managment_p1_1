@@ -3,6 +3,8 @@
 import tkinter as tk
 from tkinter import scrolledtext
 
+from startup import run_startup
+
 
 class TerminalWindow:
     """Показывать историю ввода и вывода и принимать команды."""
@@ -47,3 +49,13 @@ class TerminalWindow:
         self.prompt_label.configure(text=self.shell.prompt)
         if result.exit_requested:
             self.root.destroy()
+
+    def run_script(self, path):
+        """Показать диалог стартового сценария в окне."""
+        try:
+            should_exit = run_startup(self.shell, path, self.write)
+            self.prompt_label.configure(text=self.shell.prompt)
+            if should_exit:
+                self.root.destroy()
+        except ValueError as error:
+            self.write(f'Ошибка: {error}')
