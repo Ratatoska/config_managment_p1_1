@@ -1,0 +1,8 @@
+# VFS загружена; команды ls и cd на этом этапе ещё заглушки
+ls /
+ls -la /docs
+cd "/my folder"
+unknown_command
+ls "broken
+exit now
+exit

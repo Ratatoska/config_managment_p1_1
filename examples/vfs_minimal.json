@@ -1,0 +1,6 @@
+{
+  "name": "minimal-vfs",
+  "entries": [
+    {"path": "/", "type": "dir"}
+  ]
+}

@@ -1,0 +1,6 @@
+{
+  "name": "invalid-vfs",
+  "entries": [
+    {"path": "/missing/child.txt", "type": "file", "content": ""}
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "name": "komarov-vfs",
+  "entries": [
+    {"path": "/", "type": "dir"},
+    {"path": "/docs", "type": "dir"},
+    {"path": "/docs/notes", "type": "dir"},
+    {"path": "/docs/notes/lab", "type": "dir"},
+    {"path": "/docs/notes/lab/task.txt", "type": "file", "content": "VGFzayA4Cg=="},
+    {"path": "/docs/readme.txt", "type": "file", "content": "SGVsbG8sIFZGUyEK"},
+    {"path": "/my folder", "type": "dir"},
+    {"path": "/my folder/note.txt", "type": "file", "content": "Tm90ZQo="},
+    {"path": "/.hidden", "type": "file", "content": ""},
+    {"path": "/binary.bin", "type": "file", "content": "AAEC/w=="}
+  ]
+}

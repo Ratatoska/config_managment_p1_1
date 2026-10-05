@@ -1,0 +1,9 @@
+{
+  "name": "files-vfs",
+  "entries": [
+    {"path": "/", "type": "dir"},
+    {"path": "/hello.txt", "type": "file", "content": "SGVsbG8hCg=="},
+    {"path": "/data.bin", "type": "file", "content": "AAEC/w=="},
+    {"path": "/empty.txt", "type": "file", "content": ""}
+  ]
+}

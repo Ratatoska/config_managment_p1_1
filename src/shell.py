@@ -5,6 +5,7 @@ import socket
 from dataclasses import dataclass
 
 from parser import parse_command
+from vfs import Vfs
 
 
 @dataclass
@@ -19,9 +20,10 @@ class CommandResult:
 class Shell:
     """Выполнять команды и сохранять состояние сеанса."""
 
-    def __init__(self, vfs_name='memory'):
+    def __init__(self, vfs_name='memory', vfs=None):
         """Создать сеанс с указанным именем виртуальной системы."""
-        self.vfs_name = vfs_name
+        self.vfs = vfs if vfs is not None else Vfs(vfs_name)
+        self.vfs_name = self.vfs.name
         self.cwd = '/'
         self.user = getpass.getuser()
         self.host = socket.gethostname()

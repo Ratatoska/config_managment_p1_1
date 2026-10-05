@@ -5,6 +5,7 @@ import sys
 from config import parse_args
 from shell import Shell
 from startup import run_lines, run_startup
+from vfs import load_vfs
 
 
 def run_headless(shell, config):
@@ -32,8 +33,8 @@ def main(argv=None):
     """Разобрать параметры и запустить выбранный интерфейс."""
     config = parse_args(argv)
     print(config.describe())
-    shell = Shell(config.vfs_path.stem)
     try:
+        shell = Shell(vfs=load_vfs(config.vfs_path))
         if config.headless:
             run_headless(shell, config)
         else:
