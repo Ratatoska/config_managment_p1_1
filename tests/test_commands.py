@@ -35,6 +35,14 @@ class CommandTests(unittest.TestCase):
         self.assertTrue(self.shell.execute('ls -z').error)
         self.assertTrue(self.shell.execute('ls /missing').error)
 
+    def test_ls_directory_itself(self):
+        """-d выводит сам каталог, а не его содержимое."""
+        self.prepare()
+        text = self.shell.execute('ls -ld /docs').output
+        self.assertIn('drwxr-xr-x', text)
+        self.assertTrue(text.endswith('docs'))
+        self.assertNotIn('readme.txt', text)
+
     def test_cd_relative_and_previous(self):
         """Переходы по относительным путям обновляют приглашение."""
         self.prepare()

@@ -5,6 +5,7 @@ import socket
 from dataclasses import dataclass
 
 from commands import BasicCommands
+from mutations import MutationCommands
 from parser import parse_command
 from vfs import Vfs
 
@@ -34,6 +35,10 @@ class Shell:
             'ls': basic.ls, 'cd': basic.cd, 'find': basic.find,
             'cal': basic.cal, 'who': basic.who,
         }
+        mutations = MutationCommands(self)
+        self.commands.update({
+            'mkdir': mutations.mkdir, 'chmod': mutations.chmod,
+        })
 
     @property
     def prompt(self):

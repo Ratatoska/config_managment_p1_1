@@ -21,7 +21,10 @@ def run_gui(shell, config):
     import tkinter as tk
     from gui import TerminalWindow
 
-    root = tk.Tk()
+    try:
+        root = tk.Tk()
+    except tk.TclError as error:
+        raise ValueError(f'Не удалось открыть окно Tk: {error}') from error
     window = TerminalWindow(root, shell)
     window.write(config.describe())
     if config.startup_path:
@@ -39,7 +42,7 @@ def main(argv=None):
             run_headless(shell, config)
         else:
             run_gui(shell, config)
-    except (ValueError, OSError) as error:
+    except (ValueError, OSError, ImportError) as error:
         print(f'Ошибка запуска: {error}', file=sys.stderr)
         return 1
     return 0

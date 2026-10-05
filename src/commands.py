@@ -6,6 +6,7 @@ import posixpath
 import stat
 from datetime import date
 
+from access import EXECUTE, READ, require_access, require_traversal
 
 ONE_ARGUMENT = 1
 TWO_ARGUMENTS = 2
@@ -16,15 +17,15 @@ MAX_YEAR = 9999
 
 
 def ls_arguments(args):
-    """Разобрать флаги -a, -l и один необязательный путь."""
+    """Разобрать флаги -a, -l, -d и один необязательный путь."""
     flags, paths = set(), []
     options = True
     for arg in args:
         if options and arg == '--':
             options = False
         elif options and arg.startswith('-') and arg != '-':
-            if not set(arg[1:]) <= {'a', 'l'}:
-                raise ValueError('ls: допустимы только -a и -l')
+            if not set(arg[1:]) <= {'a', 'l', 'd'}:
+                raise ValueError('ls: допустимы только -a, -l и -d')
             flags.update(arg[1:])
         else:
             paths.append(arg)
@@ -61,9 +62,12 @@ class BasicCommands:
         """Показать содержимое каталога либо указанный файл."""
         flags, path = ls_arguments(args)
         path = self.shell.vfs.resolve(path, self.shell.cwd)
+        require_traversal(self.shell.vfs, path, self.shell.user)
         node = self.shell.vfs.get(path)
-        if node.kind == 'file':
-            return self._ls_entry(path, posixpath.basename(path), flags)
+        if node.kind == 'file' or 'd' in flags:
+            name = posixpath.basename(path) or '/'
+            return self._ls_entry(path, name, flags)
+        require_access(self.shell.vfs, path, self.shell.user, READ | EXECUTE)
         entries = [(key, posixpath.basename(key))
                    for key in self.shell.vfs.children(path)]
         if 'a' in flags:
@@ -95,6 +99,8 @@ class BasicCommands:
         path = self.shell.vfs.resolve(path, self.shell.cwd)
         if self.shell.vfs.get(path).kind != 'dir':
             raise ValueError(f'cd: не каталог: {path}')
+        require_traversal(self.shell.vfs, path, self.shell.user)
+        require_access(self.shell.vfs, path, self.shell.user, EXECUTE)
         self.shell.previous_cwd, self.shell.cwd = self.shell.cwd, path
         return path if previous else ''
 
@@ -102,9 +108,13 @@ class BasicCommands:
         """Найти пути рекурсивно по имени и типу в VFS."""
         path, pattern, kind = find_arguments(args)
         path = self.shell.vfs.resolve(path, self.shell.cwd)
+        require_traversal(self.shell.vfs, path, self.shell.user)
         matches = []
         for key in self.shell.vfs.walk(path):
             node = self.shell.vfs.get(key)
+            if node.kind == 'dir':
+                require_access(self.shell.vfs, key, self.shell.user,
+                               READ | EXECUTE)
             if kind and node.kind[0] != kind:
                 continue
             if fnmatch.fnmatchcase(posixpath.basename(key), pattern):

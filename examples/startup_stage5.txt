@@ -1,0 +1,60 @@
+# Все основные режимы и ошибки предыдущих этапов
+ls
+ls -a
+ls -l
+ls -la /docs
+ls /docs/readme.txt
+ls -- /missing
+ls -z
+cd /docs
+cd notes/lab
+cd ..
+cd -
+cd ~
+cd "/my folder"
+cd /docs/readme.txt
+cd /missing
+cd
+find /
+find / -name "*.txt"
+find /docs -type d
+find /docs -type f -name "*.txt"
+find /missing
+find / -type x
+cal
+cal 10 2026
+cal 2026
+cal 13 2026
+cal abc
+who
+who extra
+# mkdir: обычный режим, несколько путей, -p, относительный путь
+mkdir /work /second
+mkdir -p /work/a/b
+cd /work
+mkdir "my folder"
+ls -la
+mkdir /work
+mkdir /missing/child
+mkdir /docs/readme.txt/child
+mkdir
+mkdir -z /bad
+# chmod: числовой, символический, рекурсивный и несколько путей
+chmod 700 /work
+ls -ld /work
+chmod u=rwx,g=rx,o= /work
+chmod -R a+x /work
+ls -la /work
+chmod 755 /work /second
+chmod 000 /work
+cd /work
+chmod 755 /work
+cd /work
+chmod 888 /work
+chmod 644 /missing
+chmod
+find /work -type d
+unknown_command
+ls "broken
+exit now
+exit

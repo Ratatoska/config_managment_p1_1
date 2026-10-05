@@ -1,0 +1,10 @@
+# Демонстрация в GUI без автоматического закрытия окна
+ls -la
+cd /docs
+find / -name "*.txt"
+cal 10 2026
+who
+mkdir /work
+chmod 700 /work
+find / -type d
+unknown_command
