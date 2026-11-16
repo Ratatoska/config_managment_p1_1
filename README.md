@@ -59,8 +59,10 @@ python -X utf8 src/main.py examples/vfs.json examples/startup_stage5.txt --headl
 ```
 
 Скрипты запуска поддерживают переменную `PYTHON` для выбора конкретного
-интерпретатора. В Windows проверяется доступность `python`, затем
-`py -3`; в Bash выбирается `python3` или `python`.
+интерпретатора, например `PYTHON=.venv/bin/python` в Bash или
+`$env:PYTHON = '.venv/Scripts/python.exe'` в PowerShell. Без этой
+переменной в Windows проверяются `python` и `py -3`, в Bash —
+`python3` и `python`. Файл `.env` и сторонние библиотеки не нужны.
 
 ## Команды варианта 8
 
@@ -92,6 +94,8 @@ python -X utf8 src/main.py examples/vfs.json examples/startup_stage5.txt --headl
 `who` показывает текущий сеанс эмулятора, а не список всех входов в ОС.
 
 ## Пример работы
+
+![Вывод команд в окне эмулятора: поиск, создание каталога и смена прав](docs/emulator-demo.svg)
 
 ```text
 ls -la

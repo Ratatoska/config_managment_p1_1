@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='utf-8'?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 790 410">
+  <title>Эмулятор оболочки — komarov-vfs</title>
+  <rect width="790" height="410" fill="#17202a" rx="12" />
+  <path d="M12 0H778Q790 0 790 12V40H0V12Q0 0 12 0Z" fill="#273546" />
+  <text x="20" y="26" fill="#ffffff" font-family="Segoe UI, sans-serif" font-size="16">Эмулятор оболочки — komarov-vfs</text>
+  <g fill="#ecf0f1" font-family="Consolas, DejaVu Sans Mono, monospace" font-size="15">
+    <text x="20" y="64" xml:space="preserve">Введите команду. Для завершения: exit</text>
+    <text x="20" y="87" xml:space="preserve" fill="#97d3ff">student@demo:/$ ls</text>
+    <text x="20" y="110" xml:space="preserve">binary.bin</text>
+    <text x="20" y="133" xml:space="preserve">docs</text>
+    <text x="20" y="156" xml:space="preserve">my folder</text>
+    <text x="20" y="179" xml:space="preserve" fill="#97d3ff">student@demo:/$ cd "my folder"</text>
+    <text x="20" y="202" xml:space="preserve" fill="#97d3ff">student@demo:/my folder$ find /docs -name "*.txt"</text>
+    <text x="20" y="225" xml:space="preserve">/docs/notes/lab/task.txt</text>
+    <text x="20" y="248" xml:space="preserve">/docs/readme.txt</text>
+    <text x="20" y="271" xml:space="preserve" fill="#97d3ff">student@demo:/my folder$ mkdir -p /work/project</text>
+    <text x="20" y="294" xml:space="preserve" fill="#97d3ff">student@demo:/my folder$ chmod 700 /work</text>
+    <text x="20" y="317" xml:space="preserve" fill="#97d3ff">student@demo:/my folder$ ls -ld /work</text>
+    <text x="20" y="340" xml:space="preserve">drwx------ student     0 work</text>
+    <text x="20" y="363" xml:space="preserve" fill="#97d3ff">student@demo:/my folder$ cd /missing</text>
+    <text x="20" y="386" xml:space="preserve" fill="#ffc4ba">Ошибка: Путь не найден: /missing</text>
+  </g>
+</svg>
